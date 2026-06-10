@@ -119,19 +119,6 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 
 
-# ALMACECENA EL MODELO LOOCALENTE
-import joblib
-
-# Definimos rutas en TU unidad personal de Drive para no tocar la de tu compañera
-RUTA_MI_DRIVE_MODELO = 'D:/Emanuel/Desktop/ABP Proc. del Habla/version con streamlit/modelo_voz_activa.pkl'
-RUTA_MI_DRIVE_CATEGORIAS = 'D:/Emanuel/Desktop/ABP Proc. del Habla/version con streamlit/categorias.pkl'
-
-# Exportación física de los archivos
-joblib.dump(model, RUTA_MI_DRIVE_MODELO)
-joblib.dump(CATEGORIES, RUTA_MI_DRIVE_CATEGORIAS)
-
-
-
 # ADQUISICIÓN CLIMÁTICA POR GEOLOCALIZACIÓN Y SISTEMA DE ALERTAS (REAL/SIMULADO)
 def get_location_and_weather(simulation_mode=False, sim_temp=None, sim_humidity=None):
     """
@@ -233,7 +220,7 @@ with tab1:
             prob_max = max(probabilidades)
             # OBTENER EL UMBRAL ESPECÍFICO ASIGNADO AL COMANDO DETECTADO
             umbral_requerido = umbrales_dict.get(predicted_trigger, 0.70)
-            st.write(f"📊 **Análisis del clasificador:** Detectó correctamete la clase `{predicted_trigger}` con una certeza de `{prob_max:.2f}` (Umbral mínimo requerido para esta clase: `{umbral_requerido:.2f}`) ")
+            st.write(f"📊 **Análisis del clasificador:** Detectó correctamete la clase con una certeza de `{prob_max:.2f}` (Umbral mínimo requerido para esta clase: `{umbral_requerido:.2f}`) ")
             # Validación estricta usando el umbral dinámico por comando
             if prob_max < umbral_requerido:
                 st.error(f"❌ Comando rechazado. La confianza ({prob_max:.2f}) es inferior al umbral configurado para el comando. Intente vocalizar de forma más clara.")
